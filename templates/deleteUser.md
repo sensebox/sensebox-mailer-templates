@@ -17,3 +17,9 @@ fromName: openSenseMap
 template: deleteUser
 subject: Your openSenseMap account has been deleted
 ---
+
+<p>Dear {{ .user.name }},</p>
+<p>Your account and all registered senseBoxes are being deleted. Sad to see you go!</p>
+<p>This action is irreversible. If you want to participate again, register yourself a new account at <a href="https://opensensemap.org/" target="_blank">https://opensensemap.org/</a>.
+<p>If you have any questions, feel free to write us an email to: <a href="mailto:support@sensebox.de" target="_top">support@sensebox.de</a>.</p>
+<p>Best wishes<br />your senseBox Team</p>
