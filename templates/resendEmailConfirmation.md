@@ -30,3 +30,22 @@ fromName: openSenseMap
 template: resendEmailConfirmation
 subject: E-Mail address confirmation
 ---
+
+<p>
+  Hi {{ .user.name }},
+</p>
+<p>
+  Your email address on {{ .origin }} isn't confirmed yet. You can do this by clicking the link below.
+</p>
+<p>
+  <a href="{{ .origin }}/account/confirm-email?token={{ .token }}&email={{ .email }}" target="_blank">Confirm email address</a><br />
+If you are unable to click the link, you can also open this address with your web browser:
+<br />
+{{ .origin }}/account/confirm-email?token={{ .token }}&email={{ .email }}
+</p>
+<p>
+  If you have any questions, feel free to write us an email to: <a href="mailto:support@sensebox.de?Subject=Email%20Confirmation%20for%20{{ .email }}" target="_top">support@sensebox.de</a>
+</p>
+<p>
+  Best wishes<br />your senseBox Team
+</p>
