@@ -32,6 +32,9 @@ func TestSlurpTemplate(t *testing.T) {
 				if d.Body == "" {
 					t.Errorf("Template %d in file %s has empty body", i, path)
 				}
+				if d.Body == "<!-- raw HTML omitted -->" {
+					t.Errorf("Template %d in file %s should not be '<!-- raw HTML omitted -->'", i, path)
+				}
 			}
 
 		}

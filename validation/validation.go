@@ -4,7 +4,10 @@ import (
 	"bufio"
 	"bytes"
 	"io"
+	"strings"
 
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
 	"gopkg.in/yaml.v2"
 )
 
@@ -24,6 +27,10 @@ const frontMatterDelim = "---"
 
 var newLine = []byte("\n")
 
+var md = goldmark.New(
+	goldmark.WithExtensions(extension.GFM),
+)
+
 func SlurpTemplate(input io.Reader) ([]Doc, error) {
 	docs := []Doc{}
 
@@ -32,11 +39,18 @@ func SlurpTemplate(input io.Reader) ([]Doc, error) {
 	currFrontMatterBytes := []byte{}
 	currBody := []byte{}
 
-	handleBody := func() {
+	handleBody := func() error {
 		if len(currBody) != 0 {
-			docs[len(docs)-1].Body = string(bytes.TrimSpace(currBody))
+			var htmlBuffer bytes.Buffer
+			err := md.Convert(currBody, &htmlBuffer)
+			if err != nil {
+				return err
+			}
+
+			docs[len(docs)-1].Body = strings.TrimSpace(htmlBuffer.String())
 			currBody = []byte{}
 		}
+		return nil
 	}
 
 	appendFrontMatter := func() {
@@ -50,7 +64,10 @@ func SlurpTemplate(input io.Reader) ([]Doc, error) {
 		// start frontmatter
 		// maybe end of body
 		if !inFrontMatter && line == frontMatterDelim {
-			handleBody()
+			err := handleBody()
+			if err != nil {
+				return docs, err
+			}
 
 			scanner.Scan()
 			appendFrontMatter()
@@ -86,7 +103,10 @@ func SlurpTemplate(input io.Reader) ([]Doc, error) {
 		currBody = append(currBody, scanner.Bytes()...)
 	}
 
-	handleBody()
+	err := handleBody()
+	if err != nil {
+		return docs, err
+	}
 
 	if err := scanner.Err(); err != nil {
 		return docs, nil
