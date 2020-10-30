@@ -5,7 +5,24 @@ template: resendEmailConfirmation
 subject: Bestätigung deiner E-Mailadresse
 ---
 
-
+<p>
+  Hallo {{ .user.name }},
+</p>
+<p>
+  Du hast bisher deine E-Mail Adresse noch nicht bestätigt. Dies kannst du tun, indem du auf den Link unten klickst.
+</p>
+<p>
+  <a href="{{ .origin }}/account/confirm-email?token={{ .token }}&email={{ .email }}" target="_blank">E-Mail bestätigen</a><br />
+Wenn sich der Link nicht anklicken lässt, kannst du auch diese Adresse mit deinem Browser öffnen:
+<br />
+{{ .origin }}/account/confirm-email?token={{ .token }}&email={{ .email }}
+</p>
+<p>
+  Wenn Du Fragen hast schreib uns eine Mail an: <a href="mailto:support@sensebox.de?Subject=Email%20Best%C3%A4tigen%20f%C3%BCr%20{{ .email }}" target="_top">support@sensebox.de</a>
+</p>
+<p>
+  Viele Grüße,<br />dein senseBox Team
+</p>
 
 ---
 language: en
