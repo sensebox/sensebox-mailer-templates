@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: passwordReset
+name: passwordReset
 subject: Zurücksetzen deines Passworts
 ---
 
@@ -30,7 +30,7 @@ dein senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: passwordReset
+name: passwordReset
 subject: Your password reset
 ---
 

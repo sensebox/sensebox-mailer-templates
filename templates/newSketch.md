@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: newSketch
+name: newSketch
 subject: Dein neuer Sketch
 requireAttachment: true
 ---
@@ -33,7 +33,7 @@ Viel Spaß wünscht dein senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: newSketch
+name: newSketch
 subject: Your new Sketch
 requireAttachment: true
 ---

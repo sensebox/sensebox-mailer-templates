@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: newBoxHackAir
+name: newBoxHackAir
 subject: Dein neues Gerät auf der openSenseMap
 ---
 
@@ -26,7 +26,7 @@ Viel Spaß wünscht dein senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: newBoxHackAir
+name: newBoxHackAir
 subject: Your device on openSenseMap
 ---
 

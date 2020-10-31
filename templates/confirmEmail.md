@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: confirmEmail
+name: confirmEmail
 subject: openSenseMap Bestätigung deiner E-Mailadresse
 ---
 
@@ -26,7 +26,7 @@ dein senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: confirmEmail
+name: confirmEmail
 subject: openSenseMap E-Mail address confirmation
 ---
 

@@ -3,25 +3,21 @@ package validation
 import (
 	"bufio"
 	"bytes"
+	"html/template"
 	"io"
-	"strings"
 
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	"gopkg.in/yaml.v2"
 )
 
-type TemplateMeta struct {
+type Template struct {
 	Language          string `yaml:"language"`
-	Template          string `yaml:"template"`
+	Name              string `yaml:"name"`
 	Subject           string `yaml:"subject"`
 	FromName          string `yaml:"fromName"`
 	RequireAttachment bool   `yaml:"requireAttachment,omitempty"`
-}
-
-type Template struct {
-	Metadata TemplateMeta
-	Body     string
+	*template.Template
 }
 
 const frontMatterDelim = "---"
@@ -48,7 +44,13 @@ func Slurp(input io.Reader) ([]Template, error) {
 				return err
 			}
 
-			docs[len(docs)-1].Body = strings.TrimSpace(htmlBuffer.String())
+			template, err := template.New(docs[len(docs)-1].Name).Parse(htmlBuffer.String())
+			if err != nil {
+				return err
+			}
+			template.Option("missingkey=error")
+
+			docs[len(docs)-1].Template = template
 			currBody = []byte{}
 		}
 		return nil
@@ -78,16 +80,14 @@ func Slurp(input io.Reader) ([]Template, error) {
 
 		// end frontmatter
 		if inFrontMatter && line == frontMatterDelim {
-			var m TemplateMeta
+			var t Template
 
-			err := yaml.UnmarshalStrict(currFrontMatterBytes, &m)
+			err := yaml.UnmarshalStrict(currFrontMatterBytes, &t)
 			if err != nil {
 				return docs, err
 			}
 
-			docs = append(docs, Template{
-				Metadata: m,
-			})
+			docs = append(docs, t)
 
 			currFrontMatterBytes = []byte{}
 			inFrontMatter = false

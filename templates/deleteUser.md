@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: deleteUser
+name: deleteUser
 subject: Dein Account wurde gelöscht
 ---
 
@@ -20,7 +20,7 @@ dein senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: deleteUser
+name: deleteUser
 subject: Your openSenseMap account has been deleted
 ---
 

@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: newBox
+name: newBox
 subject: Deine senseBox auf der openSenseMap
 requireAttachment: true
 ---
@@ -23,7 +23,7 @@ Viel Spaß wünscht dein senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: newBox
+name: newBox
 subject: Your new senseBox on openSenseMap
 requireAttachment: true
 ---

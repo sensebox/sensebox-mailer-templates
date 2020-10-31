@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: newUser
+name: newUser
 subject: Deine openSenseMap Registrierung
 ---
 
@@ -24,7 +24,7 @@ senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: newUser
+name: newUser
 subject: Your openSenseMap registration
 ---
 

@@ -29,11 +29,24 @@ func TestSlurp(t *testing.T) {
 			}
 
 			for i, d := range templates {
-				if d.Body == "" {
-					t.Errorf("Template %d in file %s has empty body", i, path)
+				if d.Language != "de" && d.Language != "en" {
+					t.Errorf("Template %d in file %s has unknown language '%s'", i, path, d.Language)
 				}
-				if d.Body == "<!-- raw HTML omitted -->" {
-					t.Errorf("Template %d in file %s should not be '<!-- raw HTML omitted -->'", i, path)
+
+				if d.FromName == "" {
+					t.Errorf("Template %d in file %s has empty fromName", i, path)
+				}
+
+				if d.Name == "" {
+					t.Errorf("Template %d in file %s has empty name", i, path)
+				}
+
+				if d.Subject == "" {
+					t.Errorf("Template %d in file %s has empty subject", i, path)
+				}
+
+				if d.Template == nil {
+					t.Errorf("Template %d in file %s has empty body", i, path)
 				}
 			}
 

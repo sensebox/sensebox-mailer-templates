@@ -1,7 +1,7 @@
 ---
 language: de
 fromName: openSenseMap
-template: newBoxLuftdaten
+name: newBoxLuftdaten
 subject: Dein neues Gerät auf der openSenseMap
 ---
 
@@ -24,7 +24,7 @@ Viel Spaß wünscht dein senseBox Team
 ---
 language: en
 fromName: openSenseMap
-template: newBoxLuftdaten
+name: newBoxLuftdaten
 subject: Your device on openSenseMap
 ---
 
