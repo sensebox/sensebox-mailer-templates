@@ -3,6 +3,7 @@ language: de
 fromName: openSenseMap
 template: newSketch
 subject: Dein neuer Sketch
+requireAttachment: true
 ---
 
 <p>
@@ -38,6 +39,7 @@ language: en
 fromName: openSenseMap
 template: newSketch
 subject: Your new Sketch
+requireAttachment: true
 ---
 
 <p>

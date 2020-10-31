@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestSlurpTemplate(t *testing.T) {
+func TestSlurp(t *testing.T) {
 	filepath.Walk("../templates", func(path string, info os.FileInfo, e error) error {
 		if e != nil {
 			return e
@@ -19,16 +19,16 @@ func TestSlurpTemplate(t *testing.T) {
 				t.Error(err)
 			}
 
-			docs, err := SlurpTemplate(file)
+			templates, err := Slurp(file)
 			if err != nil {
 				t.Error(err)
 			}
 
-			if len(docs) != 2 {
-				t.Errorf("Expected %d templates in file %s. Got %d", 2, path, len(docs))
+			if len(templates) != 2 {
+				t.Errorf("Expected %d templates in file %s. Got %d", 2, path, len(templates))
 			}
 
-			for i, d := range docs {
+			for i, d := range templates {
 				if d.Body == "" {
 					t.Errorf("Template %d in file %s has empty body", i, path)
 				}

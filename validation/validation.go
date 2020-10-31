@@ -12,13 +12,14 @@ import (
 )
 
 type TemplateMeta struct {
-	Language string `yaml:"language"`
-	Template string `yaml:"template"`
-	Subject  string `yaml:"subject"`
-	FromName string `yaml:"fromName"`
+	Language          string `yaml:"language"`
+	Template          string `yaml:"template"`
+	Subject           string `yaml:"subject"`
+	FromName          string `yaml:"fromName"`
+	RequireAttachment bool   `yaml:"requireAttachment,omitempty"`
 }
 
-type Doc struct {
+type Template struct {
 	Metadata TemplateMeta
 	Body     string
 }
@@ -31,8 +32,8 @@ var md = goldmark.New(
 	goldmark.WithExtensions(extension.GFM),
 )
 
-func SlurpTemplate(input io.Reader) ([]Doc, error) {
-	docs := []Doc{}
+func Slurp(input io.Reader) ([]Template, error) {
+	docs := []Template{}
 
 	scanner := bufio.NewScanner(input)
 	inFrontMatter := false
@@ -84,7 +85,7 @@ func SlurpTemplate(input io.Reader) ([]Doc, error) {
 				return docs, err
 			}
 
-			docs = append(docs, Doc{
+			docs = append(docs, Template{
 				Metadata: m,
 			})
 
