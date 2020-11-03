@@ -7,7 +7,8 @@ import (
 )
 
 func TestSlurp(t *testing.T) {
-	filepath.Walk("../templates", func(path string, info os.FileInfo, e error) error {
+	testedSomething := false
+	filepath.Walk("./templates", func(path string, info os.FileInfo, e error) error {
 		if e != nil {
 			return e
 		}
@@ -48,9 +49,19 @@ func TestSlurp(t *testing.T) {
 				if d.Template == nil {
 					t.Errorf("Template %d in file %s has empty body", i, path)
 				}
-			}
 
+				_, err := d.ConvertAndExecute(nil)
+
+				if err == nil {
+					t.Errorf("ConvertAndExecute of Template %d in file %s should have returned with error", i, path)
+				}
+			}
+			testedSomething = true
 		}
 		return nil
 	})
+
+	if testedSomething == false {
+		t.Error("No tests executed!")
+	}
 }

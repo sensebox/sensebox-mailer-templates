@@ -28,6 +28,23 @@ var md = goldmark.New(
 	goldmark.WithExtensions(extension.GFM),
 )
 
+func (t *Template) ConvertAndExecute(payload map[string]interface{}) ([]byte, error) {
+	var buffer bytes.Buffer
+
+	err := t.Execute(&buffer, payload)
+	if err != nil {
+		return []byte{}, err
+	}
+
+	var mdBuffer bytes.Buffer
+	err = md.Convert(buffer.Bytes(), &mdBuffer)
+	if err != nil {
+		return []byte{}, err
+	}
+
+	return mdBuffer.Bytes(), nil
+}
+
 func Slurp(input io.Reader) ([]Template, error) {
 	docs := []Template{}
 
@@ -38,13 +55,7 @@ func Slurp(input io.Reader) ([]Template, error) {
 
 	handleBody := func() error {
 		if len(currBody) != 0 {
-			var htmlBuffer bytes.Buffer
-			err := md.Convert(currBody, &htmlBuffer)
-			if err != nil {
-				return err
-			}
-
-			template, err := template.New(docs[len(docs)-1].Name).Parse(htmlBuffer.String())
+			template, err := template.New(docs[len(docs)-1].Name).Parse(string(currBody))
 			if err != nil {
 				return err
 			}
