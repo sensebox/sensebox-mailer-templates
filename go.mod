@@ -1,4 +1,4 @@
-module github.com/sensebox/sensebox-mailer-templates/validation
+module github.com/sensebox/sensebox-mailer-templates
 
 go 1.15
 
