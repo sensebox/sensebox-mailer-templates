@@ -11,10 +11,7 @@ on:
 jobs:
   validate:
     name: Validate templates
-    runs-on: ubuntu-18.04
-    defaults:
-      run:
-        working-directory: validation
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
 
