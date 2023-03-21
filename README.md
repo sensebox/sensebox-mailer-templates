@@ -1,5 +1,7 @@
 # sensebox-mailer-templates
 
+> ℹ️ This repository contains the old openSenseMap mailer templates and is deprecated and archived. New mailer templates can be found here: https://github.com/openSenseMap/mailer
+
 Dieses Repository enthält die E-Mail Templates für den [sensebox-mailer](https://github.com/sensebox/sensebox-mailer)
 
 ## Templates
